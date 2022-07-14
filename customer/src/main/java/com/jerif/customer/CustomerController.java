@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/customers")
+@RequestMapping("api/v1/customer")
 @Slf4j
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping
+    @PostMapping("/add")
     public void registerCustomer(@RequestBody CustomerRegistrationRequest request) {
         log.info("New customer registration {}",request);
         customerService.registerCustomer(request);
