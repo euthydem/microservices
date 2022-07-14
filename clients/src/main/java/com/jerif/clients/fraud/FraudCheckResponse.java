@@ -1,4 +1,4 @@
-package com.jerif.customer;
+package com.jerif.clients.fraud;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
