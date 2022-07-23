@@ -1,16 +1,4 @@
   services:
-    postgres-fraud:
-      container_name: postgres_fraud
-      image: postgres
-      environment:
-        POSTGRES_USER: ulvi
-        POSTGRES_PASSWORD: reddevils1878
-        PGDATA: /data/postgres
-      volumes:
-        - postgres:/data/postgres
-      ports:
-        - "5433:5433"
-      restart: unless-stopped
     postgres:
       container_name: postgres
       image: postgres
@@ -25,7 +13,6 @@
       networks:
         - postgres
       restart: unless-stopped
-
     pgadmin:
       container_name: pgadmin
       image: dpage/pgadmin4
@@ -40,13 +27,14 @@
       networks:
         - postgres
       restart: unless-stopped
-
+    zipkin:
+      image: openzipkin/zipkin
+      container_name: zipkin
+      ports:
+        - "9411:9411"
   networks:
     postgres:
       driver: bridge
-    postgres_fraud:
-      driver: bridge
-
   volumes:
     postgres:
     pgadmin:
