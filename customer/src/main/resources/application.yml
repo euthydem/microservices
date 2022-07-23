@@ -6,8 +6,8 @@ spring:
     name: customer
   datasource:
     password: password
+    username: jerif
     url: jdbc:postgresql://localhost:5432/customer
-    username: amigoscode
   jpa:
     hibernate:
       ddl-auto: create-drop

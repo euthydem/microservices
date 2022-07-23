@@ -2,6 +2,8 @@ package com.jerif.customer;
 
 import com.jerif.clients.fraud.FraudCheckResponse;
 import com.jerif.clients.fraud.FraudClient;
+import com.jerif.clients.notification.NotificationClient;
+import com.jerif.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    private final RestTemplate restTemplate;
+    private final NotificationClient notificationClient;
     private final FraudClient fraudClient;
 
 
@@ -31,7 +33,12 @@ public class CustomerService {
         customerRepository.saveAndFlush(customer);
         FraudCheckResponse fraudster = fraudClient.isFraudster(customer.getId());
 
-        //todo: send notification
+        notificationClient.sendNotification(new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Hi %s, welcome to Amigoscode...",
+                        customer.getFirstName())
+        ));
 
     }
 }
